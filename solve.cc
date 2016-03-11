@@ -32,7 +32,7 @@ int sudoku::matrix::dfs(int ni, int nj)
 		int sig = row[ni] | col[nj] | block[ni/3][nj/3];
 		for (int i = 0; i < 9; ++i)
 		{
-			if (!(sig & 1<<i))
+			if (!(sig & (1<<i)))
 			{
 				obj[ni][nj] = i+1;
 				row[ni] |= 1<<i;
