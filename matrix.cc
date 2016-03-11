@@ -42,7 +42,7 @@ sudoku::matrix::matrix(int (*mat)[10]):ra()
 int sudoku::matrix::dfs(int ni, int nj)
 {
 	// std::cout << '(' << ni << ',' << nj << ')' << std::endl;
-	if ((this->obj)[ni][nj])
+	if (this->obj[ni][nj])
 	{
 		if (nj+1 < 9)
 			return dfs(ni, nj+1);
@@ -53,7 +53,7 @@ int sudoku::matrix::dfs(int ni, int nj)
 	}
 	else
 	{
-		int sig = (this->row)[ni] | (this->col)[nj] | (this->block)[ni/3][nj/3];
+		int sig = this->row[ni] | this->col[nj] | this->block[ni/3][nj/3];
 		// std::cout << sig << std::endl;
 		this->ra.narray();
 		for (int i = 0; i < 9; ++i)
@@ -64,10 +64,10 @@ int sudoku::matrix::dfs(int ni, int nj)
 			if (!(sig & sign))
 			{
 				// std::cout << std::endl << i << std::endl;
-				(this->obj)[ni][nj] = ri;
-				(this->row)[ni] |= sign;
-				(this->col)[nj] |= sign;
-				(this->block)[ni/3][nj/3] |= sign;
+				this->obj[ni][nj] = ri;
+				this->row[ni] |= sign;
+				this->col[nj] |= sign;
+				this->block[ni/3][nj/3] |= sign;
 				if (nj+1 < 9)
 				{
 					if (dfs(ni, nj+1) > 0)
@@ -82,10 +82,10 @@ int sudoku::matrix::dfs(int ni, int nj)
 				{
 					return 1;
 				}
-				// (this->obj)[ni][nj] = 0;
-				(this->row)[ni] ^= sign;
-				(this->col)[nj] ^= sign;
-				(this->block)[ni/3][nj/3] ^= sign;
+				this->obj[ni][nj] = 0;
+				this->row[ni] ^= sign;
+				this->col[nj] ^= sign;
+				this->block[ni/3][nj/3] ^= sign;
 			}
 		}
 		return -1;
@@ -104,7 +104,7 @@ int sudoku::matrix::output(int (*mat)[10])
 	{
 		for (int j = 0; j < 9; ++j)
 		{
-			mat[i][j] = (this->obj)[i][j];
+			mat[i][j] = this->obj[i][j];
 			res = res && mat[i][j];
 		}
 	}
