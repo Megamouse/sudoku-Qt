@@ -2,6 +2,8 @@ objects = rdarray.o matrix.o exmat.o
 
 main : $(objects)
 	g++ -o main $(objects)
+	@-mkdir bin/
+	mv main *.o bin/
 
 rdarray.o : rdarray.h
 	g++ -c rdarray.cc
@@ -14,4 +16,4 @@ exmat.o : include.h matrix.h rdarray.h
 
 .PHONY : clean
 clean :
-	-rm $(objects)
+	-rm bin/*
