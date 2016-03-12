@@ -31,12 +31,29 @@ int sudoku::matrix::input(int (*mat)[10])
 			this->obj[i][j] = mat[i][j];
 		}
 	}
-	init();
+    return 1;
 }
 
 sudoku::matrix::matrix(int (*mat)[10]):ra()
 {
 	input(mat);
+}
+
+sudoku::matrix::matrix()
+{
+    for (int i = 0; i < 9; ++i)
+    {
+        this->row[i] = this->col[i] = 0;
+        this->block[i/3][i%3] = 0;
+    }
+
+    for (int i = 0; i < 9; ++i)
+    {
+        for (int j = 0; j < 9; ++j)
+        {
+            this->obj[i][j] = 0;
+        }
+    }
 }
 
 int sudoku::matrix::dfs(int ni, int nj)
@@ -94,6 +111,7 @@ int sudoku::matrix::dfs(int ni, int nj)
 
 void sudoku::matrix::solve()
 {
+    init();
 	dfs(0, 0);
 }
 
@@ -109,4 +127,31 @@ int sudoku::matrix::output(int (*mat)[10])
 		}
 	}
 	return res;
+}
+
+void sudoku::matrix::write(int i, int j, int val)
+{
+	this->obj[i][j] = val;
+}
+
+int sudoku::matrix::read(int i, int j)
+{
+	return this->obj[i][j];
+}
+
+void sudoku::matrix::empty()
+{
+    for (int i = 0; i < 9; ++i)
+    {
+        this->row[i] = this->col[i] = 0;
+        this->block[i/3][i%3] = 0;
+    }
+
+    for (int i = 0; i < 9; ++i)
+    {
+        for (int j = 0; j < 9; ++j)
+        {
+            this->obj[i][j] = 0;
+        }
+    }
 }

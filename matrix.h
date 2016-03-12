@@ -7,10 +7,14 @@
 namespace sudoku{
 	class matrix{
 		public:
+        void write(int i, int j, int val);
+        void empty();
 		void solve();
+		int read(int i, int j);
 		int output(int (*mat)[10]);
 		int input(int (*mat)[10]);
 		matrix(int (*mat)[10]);
+        matrix();
 
 		private:
 		int obj[10][10];
