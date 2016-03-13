@@ -10,8 +10,8 @@ namespace sudoku{
 		bool you_win();
         void write(int i, int j, int val);
 		void new_puzzle();
-        void empty();
 		void solve();
+        void reset();
 		int read(int i, int j);
 		int output(int (*mat)[10]);
 		int input(int (*mat)[10]);
@@ -26,6 +26,7 @@ namespace sudoku{
 		int ne[10][10];
 		sudoku::rdarray ra;
 		int dfs(int ni, int nj);
+        void empty();
 		void init();
 	};
 }

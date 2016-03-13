@@ -35,9 +35,12 @@ private slots:
 
     void on_actionNew_game_triggered();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     int Column, Row;
+    void click__on_pb(int num);
 };
 
 #endif // MAINWINDOW_H

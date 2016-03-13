@@ -8,6 +8,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    matx.new_puzzle();
+    for (int i = 0; i < 9; ++i)
+    {
+        for (int j = 0; j < 9; ++j)
+        {
+            QTableWidgetItem* Cell = ui->table->item(i, j);
+            QString str = "";
+            str += '0' + matx.read(i, j);
+            const QString cstr = str;
+            Cell->setText(cstr);
+            if (matx.read(i, j))
+            {
+                QColor c(122,122,235);
+                Cell->setBackgroundColor(c);
+            }
+        }
+    }
+    ui->label->setText("sudoku!!");
 }
 
 MainWindow::~MainWindow()
@@ -27,80 +45,68 @@ void MainWindow::on_table_cellClicked(int row, int column)
     ui->label->setText(cstr);
 }
 
+void MainWindow::click__on_pb(int num)
+{
+    QTableWidgetItem* Cell = ui->table->item(Row, Column);
+    matx.write(Row, Column, num);
+    QString str = "";
+    str += '0' + matx.read(Row, Column);
+    const QString cstr = str;
+    Cell->setText(cstr);
+    if (matx.you_win())
+    {
+        ui->label->setText("you win!!");
+    }
+}
+
 void MainWindow::on_pb00_1_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 1);
-    Cell->setText("1");
+   click__on_pb(1);
 }
 
 void MainWindow::on_pb00_2_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 2);
-    Cell->setText("2");
+    click__on_pb(2);
 }
 
 void MainWindow::on_pb00_3_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 3);
-    Cell->setText("3");
+    click__on_pb(3);
 }
 
 void MainWindow::on_pb00_4_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 4);
-    Cell->setText("4");
+    click__on_pb(4);
 }
 
 void MainWindow::on_pb00_5_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 5);
-    Cell->setText("5");
+    click__on_pb(5);
 }
 
 void MainWindow::on_pb00_6_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 6);
-    Cell->setText("6");
+    click__on_pb(6);
 }
 
 void MainWindow::on_pb00_7_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 7);
-    Cell->setText("7");
+    click__on_pb(7);
 }
 
 void MainWindow::on_pb00_8_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 8);
-    Cell->setText("8");
+    click__on_pb(8);
 }
 
 void MainWindow::on_pb00_9_clicked()
 {
-    //extern sudoku::matrix mat;
-    QTableWidgetItem* Cell = ui->table->item(Row, Column);
-    matx.write(Row, Column, 9);
-    Cell->setText("9");
+    click__on_pb(9);
 }
 
 void MainWindow::on_solve_clicked()
 {
+    matx.reset();
     matx.solve();
     for (int i = 0; i < 9; ++i)
 	{
@@ -117,13 +123,42 @@ void MainWindow::on_solve_clicked()
 
 void MainWindow::on_actionNew_game_triggered()
 {
-    matx.empty();
+    matx.new_puzzle();
     for (int i = 0; i < 9; ++i)
     {
         for (int j = 0; j < 9; ++j)
         {
             QTableWidgetItem* Cell = ui->table->item(i, j);
-            Cell->setText("0");
+            QString str = "";
+            str += '0' + matx.read(i, j);
+            const QString cstr = str;
+            Cell->setText(cstr);
+            if (matx.read(i, j))
+            {
+                QColor c(122,122,235);
+                Cell->setBackgroundColor(c);
+            }
+            else
+            {
+                QColor c(255,255,255);
+                Cell->setBackgroundColor(c);
+            }
+        }
+    }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    matx.reset();
+    for (int i = 0; i < 9; ++i)
+    {
+        for (int j = 0; j < 9; ++j)
+        {
+            QTableWidgetItem* Cell = ui->table->item(i, j);
+            QString str = "";
+            str += '0' + matx.read(i, j);
+            const QString cstr = str;
+            Cell->setText(cstr);
         }
     }
 }

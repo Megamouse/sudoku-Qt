@@ -240,7 +240,7 @@ void sudoku::matrix::new_puzzle()
 	empty();
 	solve();
 	srand(time(NULL));
-	int rdbox = rand()%10 + 35;
+    int rdbox = rand()%10 + 40;
 	for (int k = 0; k < rdbox; ++k)
 	{
 		int i = rand()%9;
@@ -253,4 +253,16 @@ void sudoku::matrix::new_puzzle()
 		obj[i][j] = 0;
 	}
 	init();
+}
+
+void sudoku::matrix::reset()
+{
+    for (int i = 0; i < 9; ++i)
+    {
+        for (int j = 0; j < 9; ++j)
+        {
+            if (!ne[i][j])
+                obj[i][j] = 0;
+        }
+    }
 }
