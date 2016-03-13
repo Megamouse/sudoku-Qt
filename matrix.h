@@ -7,7 +7,9 @@
 namespace sudoku{
 	class matrix{
 		public:
+		bool you_win();
         void write(int i, int j, int val);
+		void new_puzzle();
         void empty();
 		void solve();
 		int read(int i, int j);
@@ -21,6 +23,7 @@ namespace sudoku{
 		int row[10];
 		int col[10];
 		int block[5][5];
+		int ne[10][10];
 		sudoku::rdarray ra;
 		int dfs(int ni, int nj);
 		void init();
