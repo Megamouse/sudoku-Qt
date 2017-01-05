@@ -7,6 +7,8 @@ A c++ program to solve sudoku-game.
 deps : Qt5
 
 '''
+
 qmake
 make
+
 '''
