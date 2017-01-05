@@ -2,4 +2,11 @@
 
 A c++ program to solve sudoku-game.
 
-2016-3-14 : Finished
+## how to compile
+
+deps : Qt5
+
+'''
+qmake
+make
+'''
